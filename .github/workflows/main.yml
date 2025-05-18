@@ -48,10 +48,20 @@ jobs:
     - name: Build Docker Image
       run: docker build -f Dockerfile -t myapp:latest .
 
+    - name: Show default Docker daemon.json content
+      run: |
+        if [ -f /etc/docker/daemon.json ]; then
+          echo "Showing /etc/docker/daemon.json:"
+          sudo cat /etc/docker/daemon.json
+        else
+          echo "No /etc/docker/daemon.json found. Skipping."
+        fi
+
     - name: Docker Scout Scan
       run: | 
         curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
         sh install-scout.sh
         docker scout quickview
         docker scout cves
+
       
