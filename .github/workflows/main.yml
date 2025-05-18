@@ -49,16 +49,16 @@ jobs:
       run: docker build -f Dockerfile -t myapp:latest .
 
     - name: Show default Docker daemon.json content
-        run: |
-          set +e
-          echo "Checking for /etc/docker/daemon.json..."
-          if [ -f /etc/docker/daemon.json ]; then
-            sudo cat /etc/docker/daemon.json
-          else
-            echo "No /etc/docker/daemon.json found. Skipping."
-          fi
-          echo "Continuing pipeline..."
-          exit 0
+      run: |
+        set +e
+        echo "Checking for /etc/docker/daemon.json..."
+        if [ -f /etc/docker/daemon.json ]; then
+          sudo cat /etc/docker/daemon.json
+        else
+          echo "No /etc/docker/daemon.json found. Skipping."
+        fi
+        echo "Continuing pipeline..."
+        exit 0
 
     - name: Docker Scout Scan
       run: | 
